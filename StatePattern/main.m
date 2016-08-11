@@ -7,11 +7,24 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Context.h"
+#import "ClosingState.h"
+#import "RHCContext.h"
+#import "ConcreteState1.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
-        // insert code here...
-        NSLog(@"Hello, World!");
+        Context *context = [Context new];
+        [context setLiftState:[ClosingState new]];
+        [context open];
+        [context close];
+        [context run];
+        [context stop];
+        
+        RHCContext *ctx = [RHCContext new];
+        ctx.currentState = [ConcreteState1 new];
+        [ctx handle1];
+        [ctx handle2];
     }
     return 0;
 }
